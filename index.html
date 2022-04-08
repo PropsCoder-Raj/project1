@@ -12,17 +12,33 @@
 
 <body>
 	<div class="container pt-5">
-		<h5 class="h5">Email Text Field Validation</h5>
-		<input type="email" id="emailinput" max="30" placeholder="Enter address" class="form-control" onkeyup="emailValid()">
-		<label class="form-check-label text-danger" id="emailErrorMessage" style="display: none"> Email is not valid </label>
-		<label class="form-check-label text-danger" id="emailErrorMaximum30Message" style="display: none"> Email is not maximum 30 letter </label>
-		<label class="form-check-label text-success" id="emailSuccessMessage" style="display: none"> Email is valid </label>
+		<div class="row">
+			<div class="col-lg-6">
+				<h5 class="h5">Email Text Field Validation</h5>
+				<input type="email" id="emailinput" placeholder="Enter email address" class="form-control" onkeyup="emailValid()">
+				<label class="form-check-label text-danger" id="emailErrorMessage" style="display: none"> Email is not valid </label>
+				<label class="form-check-label text-danger" id="emailErrorMaximum30Message" style="display: none"> Email is not maximum 30 letter </label>
+				<label class="form-check-label text-success" id="emailSuccessMessage" style="display: none"> Email is valid </label>
+			</div>
+			<div class="col-lg-6">
+				<h5 class="h5">Password Text Field Validation</h5>
+				<input type="password" id="passwordinput" placeholder="Enter password" class="form-control" onkeyup="passwordValid()">
+				<label class="form-check-label text-danger" id="passwordErrorMinimum8Message" style="display: none"> Password is minimum 8 letter</label>
+				<label class="form-check-label text-danger" id="passwordErrorMinimum16Message" style="display: none"> Password is maximum 16 letter</label>
+				<label class="form-check-label text-success" id="passwordSuccessMessage" style="display: none"> Paasword is valid. </label>
+				<button class="btn btn-primary" style="width: 20%" onclick="passwordMask()">Hide/View</button>
+			</div>
+		</div>
 	</div>
 </body>
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById('emailinput').addEventListener('focus', function () {
 			var emailinput = document.getElementById("emailinput");
+			emailinput.placeholder = '';
+		});
+		document.getElementById('passwordinput').addEventListener('focus', function () {
+			var emailinput = document.getElementById("passwordinput");
 			emailinput.placeholder = '';
 		});
 	});
@@ -48,6 +64,36 @@
 			emailErrorMaximum30Message.style.display = 'block';
 			emailErrorMessage.style.display = 'none';
 			emailSuccessMessage.style.display = 'none';
+		}
+	}
+
+	function passwordValid() {
+		var passwordinput = document.getElementById("passwordinput");
+		var passwordErrorMinimum8Message = document.getElementById("passwordErrorMinimum8Message");
+		var passwordErrorMinimum16Message = document.getElementById("passwordErrorMinimum16Message");
+		var passwordSuccessMessage = document.getElementById("passwordSuccessMessage");
+		var str = new String(passwordinput.value);
+		if(str.length < 8) {
+			passwordErrorMinimum8Message.style.display = 'block';
+			passwordErrorMinimum16Message.style.display = 'none';
+			passwordSuccessMessage.style.display = 'none';	
+		}else if(str.length > 16) {
+			passwordErrorMinimum8Message.style.display = 'none';
+			passwordErrorMinimum16Message.style.display = 'block';
+			passwordSuccessMessage.style.display = 'none';	
+		}else{
+			passwordErrorMinimum8Message.style.display = 'none';
+			passwordErrorMinimum16Message.style.display = 'none';
+			passwordSuccessMessage.style.display = 'block';	
+		}
+	}
+
+	function passwordMask() {
+		var passwordinput = document.getElementById('passwordinput');
+		if(passwordinput.type == 'password'){
+			passwordinput.type = 'text';
+		}else{
+			passwordinput.type = 'password';
 		}
 	}
 </script>
