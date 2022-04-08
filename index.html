@@ -25,10 +25,19 @@
 				<input type="password" id="passwordinput" placeholder="Enter password" class="form-control" onkeyup="passwordValid()">
 				<label class="form-check-label text-danger" id="passwordErrorMinimum8Message" style="display: none"> Password is minimum 8 letter</label>
 				<label class="form-check-label text-danger" id="passwordErrorMinimum16Message" style="display: none"> Password is maximum 16 letter</label>
-				<label class="form-check-label text-success" id="passwordSuccessMessage" style="display: none"> Paasword is valid. </label>
+				<label class="form-check-label text-success" id="passwordSuccessMessage" style="display: none"> Password is valid. </label>
 				<button class="btn btn-primary" style="width: 20%" onclick="passwordMask()">Hide/View</button>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<h5 class="h5">Alpha Text Field Validation</h5>
+				<input type="text" id="alphainput" placeholder="Enter alpha" class="form-control" onkeyup="alphaValid()">
+				<label class="form-check-label text-danger" id="alphaErrorMinimum5Message" style="display: none"> Alpha is minimum 5 letter</label>
+				<label class="form-check-label text-danger" id="alphaErrorMinimum30Message" style="display: none"> Alpha is maximum 30 letter</label>
+				<label class="form-check-label text-success" id="alphaSuccessMessage" style="display: none"> Alpha is valid. </label>
+			</div>
+		</div>	
 	</div>
 </body>
 <script>
@@ -38,8 +47,12 @@
 			emailinput.placeholder = '';
 		});
 		document.getElementById('passwordinput').addEventListener('focus', function () {
-			var emailinput = document.getElementById("passwordinput");
-			emailinput.placeholder = '';
+			var passwordinput = document.getElementById("passwordinput");
+			passwordinput.placeholder = '';
+		});
+		document.getElementById('alphainput').addEventListener('focus', function () {
+			var alphainput = document.getElementById("alphainput");
+			alphainput.placeholder = '';
 		});
 	});
 
@@ -96,6 +109,28 @@
 			passwordinput.type = 'password';
 		}
 	}
+
+	function alphaValid() {
+		var alphainput = document.getElementById("alphainput");
+		var alphaErrorMinimum5Message = document.getElementById("alphaErrorMinimum5Message");
+		var alphaErrorMinimum30Message = document.getElementById("alphaErrorMinimum30Message");
+		var alphaSuccessMessage = document.getElementById("alphaSuccessMessage");
+		var str = new String(alphainput.value);
+		if(str.length < 5) {
+			alphaErrorMinimum5Message.style.display = 'block';
+			alphaErrorMinimum30Message.style.display = 'none';
+			alphaSuccessMessage.style.display = 'none';	
+		}else if(str.length > 30) {
+			alphaErrorMinimum5Message.style.display = 'none';
+			alphaErrorMinimum30Message.style.display = 'block';
+			alphaSuccessMessage.style.display = 'none';	
+		}else{
+			alphaErrorMinimum5Message.style.display = 'none';
+			alphaErrorMinimum30Message.style.display = 'none';
+			alphaSuccessMessage.style.display = 'block';	
+		}
+	}
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
